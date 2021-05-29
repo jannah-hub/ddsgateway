@@ -1,11 +1,13 @@
 <?php
 
-/** @var \Laravel\Lumen\Routing\Router $router */
+
 
 /*
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------
+-----
 | Application Routes
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------
+-----
 |
 | Here is where you can register all of the routes for an application.
 | It is a breeze. Simply tell Lumen the URIs it should respond to
@@ -14,5 +16,30 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+ return $router->app->version();
+}); //this will point to your local directory
+
+/* old code
+// unsecure routes 
+$router->group(['prefix' => 'api'], function () use ($router) {
+ $router->get('/users',['uses' => 'UserController@getUsers']);
 });
+*/
+
+    // API GATEWAY FOR SITE1 USERS
+    $router->get('/users1', 'User1Controller@index'); //get all users record
+    $router->post('/users1', 'User1Controller@add'); //create new users record
+    $router->get('/users1/{id}', 'User1Controller@show'); //get new users by id record
+    $router->put('/users1/{id}', 'User1Controller@update'); //update user record
+    $router->patch('/users1/{id}', 'User1Controller@update'); //update user record
+    $router->delete('/users1/{id}', 'User1Controller@delete'); //delete record
+
+    // API GATEWAY FOR SITE2 USERS
+    $router->get('/users2', 'User2Controller@index'); //get all users record
+    $router->post('/users2', 'User2Controller@add'); //create new users record
+    $router->get('/users2/{id}', 'User2Controller@show'); //get new users by id record
+    $router->put('/users2/{id}', 'User2Controller@update'); //update user record
+    $router->patch('/users2/{id}', 'User2Controller@update'); //update user record
+    $router->delete('/users2/{id}', 'User2Controller@delete'); //delete record
+
+?>
