@@ -25,6 +25,8 @@ $router->group(['prefix' => 'api'], function () use ($router) {
  $router->get('/users',['uses' => 'UserController@getUsers']);
 });
 */
+//with authentication using the middleware
+$router->group(['middleware' => 'client.credentials'], function () use ($router){
 
     // API GATEWAY FOR SITE1 USERS
     $router->get('/users1', 'User1Controller@index'); //get all users record
@@ -41,5 +43,11 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->put('/users2/{id}', 'User2Controller@update'); //update user record
     $router->patch('/users2/{id}', 'User2Controller@update'); //update user record
     $router->delete('/users2/{id}', 'User2Controller@delete'); //delete record
+
+});
+
+    $router->group(['middleware' => 'auth:api'], function () use ($router){
+        $router->get('users/me', 'UserController@me');
+    });
 
 ?>
