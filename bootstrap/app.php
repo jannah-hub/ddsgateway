@@ -38,6 +38,7 @@ $app = new \Dusterio\LumenPassport\Lumen7Application(
     $app->configure('services');
     $app->configure('auth');
 
+    //add config database
     $app->configure('database');
 
 /*
